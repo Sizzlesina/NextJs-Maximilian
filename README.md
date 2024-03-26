@@ -1,0 +1,1 @@
+# Maximilian Next JS Course
