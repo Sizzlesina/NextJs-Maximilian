@@ -2,7 +2,7 @@
   "extends": ["next/babel", "next/core-web-vitals"],
   "overrides": [
     {
-      "files": ["*.jsx", "*.js"], // You can add tsx and ts files in here if the project supports it
+      "files": ["*.jsx", "*.js"],
       "rules": {
         "no-unused-vars": "warn",
         "@next/next/no-img-element": "off"
