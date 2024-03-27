@@ -2,10 +2,6 @@ import path from "path";
 import fs from "fs/promises";
 
 function ProductDetailPage({ loadedProduct }) {
-  if (!loadedProduct) {
-    return <p>Loading...</p>;
-  }
-
   return (
     <>
       <h1>{loadedProduct.title}</h1>
@@ -34,12 +30,8 @@ export async function getStaticProps(context) {
 
 export async function getStaticPaths() {
   return {
-    paths: [
-      { params: { pid: "p1" } },
-      // { params: { pid: "p2" } },
-      // { params: { pid: "p3" } },
-    ],
-    fallback: true, // @ With fallback set to true we can only pre-render the highly visited pages and the rest wont be pre-fetched
+    paths: [{ params: { pid: "p1" } }],
+    fallback: "blocking", // @ Now next will wait for the page to be rendered then show the content
   };
 }
 
