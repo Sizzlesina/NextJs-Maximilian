@@ -1,7 +1,6 @@
 import path from "path";
 import fs from "fs/promises";
 import Link from "next/link";
-import { redirect } from "next/dist/server/api-utils";
 
 function HomePage({ products }) {
   return (
