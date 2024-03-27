@@ -2,8 +2,6 @@ import EventItem from "./EventItem";
 import styles from "./EventList.module.css";
 
 function EventList({ events }) {
-  const x = 1;
-
   return (
     <ul className={styles.list}>
       {events.map((event) => (
