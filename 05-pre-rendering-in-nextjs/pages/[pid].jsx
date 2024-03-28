@@ -4,7 +4,7 @@ import fs from "fs/promises";
 function ProductDetailPage({ loadedProduct }) {
   if (!loadedProduct) {
     return <p>Loading...</p>;
-  } // If the data isn't pre-fetched till the data get render it will show an loading 
+  } 
 
   return (
     <>
@@ -33,7 +33,7 @@ export async function getStaticProps(context) {
     return {
       notFound: true,
     };
-  }  // If the product id wont exist it will show a 404 page
+  }  
 
   return {
     props: {
@@ -51,7 +51,7 @@ export async function getStaticPaths() {
 
   return {
     paths: pathsWithParams,
-    fallback: true, // In here we will pre-fetch the data for 3 product ids and the rest wont be pre-fetched
+    fallback: true, 
   };
 }
 
