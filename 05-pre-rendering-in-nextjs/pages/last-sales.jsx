@@ -45,22 +45,20 @@ function LastSalesPage(props) {
   );
 }
 
-// This part is different from the course codes
 export async function getStaticProps() {
   try {
     const { data } = await axios.get(
       "https://nextjs-course-434e2-default-rtdb.firebaseio.com/sales.json"
     );
     const transformedSales = [];
-    if (data) {
-      for (const key in data) {
-        transformedSales.push({
-          id: key,
-          username: data[key].username,
-          volume: data[key].volume,
-        });
-      }
+    for (const key in data) {
+      transformedSales.push({
+        id: key,
+        username: data[key].username,
+        volume: data[key].volume,
+      });
     }
+
     return {
       props: {
         sales: transformedSales,
@@ -68,7 +66,6 @@ export async function getStaticProps() {
       revalidate: 10,
     };
   } catch (err) {
-    console.log(err.message);
     return {
       props: {
         sales: [],
