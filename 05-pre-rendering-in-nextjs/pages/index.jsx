@@ -16,14 +16,6 @@ function HomePage({ products }) {
   );
 }
 
-/*
-When we pre-render dynamic routes we can do it in 2 ways :
-@ 1- Using getStaticProps and getStaticPaths 
-@ 2- Using getServerSideProps 
- Now the difference between these two is that in the first method we must tell nextJs which dynamic path we want to be pre-rendered (recommanded way)
- But in the second method nextJs will pre-render every dynamic path
- */
-
 export async function getStaticProps(context) {
   console.log("(Re)-generating");
   const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
