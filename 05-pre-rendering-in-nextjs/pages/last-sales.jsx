@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import useSWR from "swr";
-function LastSalesPage() {
-  const [sales, setSales] = useState();
+import axios from "axios";
+
+function LastSalesPage(props) {
+  const [sales, setSales] = useState(props.sales);
 
   // Fetch data in another way from server side AND Format the form of data
-  // @ Second parameter of the useSWR is a fetcher function which in it we must first fetch the data in the parameters of the function then do whatever we want to the data
   const { data, error } = useSWR(
     "https://nextjs-course-434e2-default-rtdb.firebaseio.com/sales.json",
-    async function getData(url) {
-      const response = await fetch(url);
-      const data = await response.json();
-
+    async (url) => {
+      const { data } = await axios.get(url);
       const transformedSales = [];
       for (const key in data) {
         transformedSales.push({
@@ -30,7 +29,7 @@ function LastSalesPage() {
   }
 
   // If the data is not exist yet or the render's not finished
-  if (!data || !sales) {
+  if (!data && !sales) {
     return <p>Loading...</p>;
   }
 
@@ -44,6 +43,39 @@ function LastSalesPage() {
       ))}
     </ul>
   );
+}
+
+// This part is different from the course codes
+export async function getStaticProps() {
+  try {
+    const { data } = await axios.get(
+      "https://nextjs-course-434e2-default-rtdb.firebaseio.com/sales.json"
+    );
+    const transformedSales = [];
+    if (data) {
+      for (const key in data) {
+        transformedSales.push({
+          id: key,
+          username: data[key].username,
+          volume: data[key].volume,
+        });
+      }
+    }
+    return {
+      props: {
+        sales: transformedSales,
+      },
+      revalidate: 10,
+    };
+  } catch (err) {
+    console.log(err.message);
+    return {
+      props: {
+        sales: [],
+      },
+      revalidate: 10,
+    };
+  }
 }
 
 export default LastSalesPage;
