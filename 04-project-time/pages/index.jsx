@@ -1,5 +1,5 @@
 import EventList from "../components/events/EventList";
-import { dummygGetFeaturedEvents } from "../dummy-data";
+import { dummyGetFeaturedEvents } from "../dummy-data";
 import { getFeaturedEvents } from "../helpers/api-util";
 
 function HomePage({ events }) {
@@ -21,7 +21,7 @@ export async function getStaticProps() {
     };
   } catch (err) {
     console.log(err.message);
-    const featuredEvents = dummygGetFeaturedEvents();
+    const featuredEvents = dummyGetFeaturedEvents();
     return {
       props: {
         events: featuredEvents,
