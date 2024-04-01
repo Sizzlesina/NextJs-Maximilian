@@ -1,19 +1,34 @@
 import EventList from "../components/events/EventList";
-import ErrorAlert from "../components/ui/ErrorAlert";
-import { getFeaturedEvents } from "../dummy-data";
+import { dummygGetFeaturedEvents } from "../dummy-data";
+import { getFeaturedEvents } from "../helpers/api-util";
 
-function HomePage() {
-  const featuredEvents = getFeaturedEvents();
-
+function HomePage({ events }) {
   return (
     <div>
-      <EventList events={featuredEvents} />
-      <ErrorAlert>
-        <p>This Project is DONE </p>
-        <p>(Undo this field if you want to)</p>
-      </ErrorAlert>
+      <EventList events={events} />
     </div>
   );
+}
+
+export async function getStaticProps() {
+  try {
+    const featuredEvents = await getFeaturedEvents();
+    return {
+      props: {
+        events: featuredEvents,
+      },
+      revalidate: 10,
+    };
+  } catch (err) {
+    console.log(err.message);
+    const featuredEvents = dummygGetFeaturedEvents();
+    return {
+      props: {
+        events: featuredEvents,
+      },
+      revalidate: 10,
+    };
+  }
 }
 
 export default HomePage;
