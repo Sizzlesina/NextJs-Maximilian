@@ -1,6 +1,12 @@
+// Next js imports
 import { useRouter } from "next/router";
+import Head from "next/head";
+
+// Component imports
 import EventList from "../../components/events/EventList";
 import EventSearch from "../../components/events/EventSearch";
+
+// Handler function imports
 import { dummyGetAllEvents } from "../../dummy-data";
 import { getAllEvents } from "../../helpers/api-util";
 
@@ -14,6 +20,13 @@ function AllEventsPage({ events }) {
 
   return (
     <>
+      <Head>
+        <title>All Events</title>
+        <meta
+          name='description'
+          content='Find a lot of great events that allow you to evolve...'
+        />
+      </Head>
       <EventSearch onSearch={handleFindEvents} />
       <EventList events={events} />
     </>

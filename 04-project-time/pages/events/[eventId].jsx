@@ -1,8 +1,14 @@
+// Next js imports
 import { useRouter } from "next/router";
+import Head from "next/head";
+
+// Component imports
 import EventSummary from "../../components/event-detail/EventSummary";
 import EventLogistics from "../../components/event-detail/EventLogistics";
 import EventContent from "../../components/event-detail/EventContent";
 import ErrorAlert from "../../components/ui/ErrorAlert";
+
+// Handler function imports
 import { dummyGetFeaturedEvents, dummyGetEventById } from "../../dummy-data";
 import { getEventById, getFeaturedEvents } from "../../helpers/api-util";
 
@@ -19,6 +25,10 @@ function EventDetailPage({ selectedEvent }) {
 
   return (
     <>
+      <Head>
+        <title>{event.title}</title>
+        <meta name='description' content={event.description} />
+      </Head>
       <EventSummary title={event.title} />
       <EventLogistics
         date={event.date}

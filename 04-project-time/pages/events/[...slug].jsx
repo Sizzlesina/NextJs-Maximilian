@@ -1,11 +1,17 @@
+// Built in imports
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
+
+// Package imports
 import useSWR from "swr";
+import axios from "axios";
+
+// Component imports
 import ErrorAlert from "../../components/ui/ErrorAlert";
 import Button from "../../components/ui/Button";
 import ResultsTitle from "../../components/events/ResultsTitle";
 import EventList from "../../components/events/EventList";
-import axios from "axios";
 
 function FilteredEventsPage(props) {
   const [loadedEvents, setLoadedEvents] = useState();
@@ -15,7 +21,7 @@ function FilteredEventsPage(props) {
 
   const { data, error } = useSWR(
     "https://nextjs-course-434e2-default-rtdb.firebaseio.com/events.json",
-    (url) => fetch(url).then((res) => res.json()  )
+    (url) => fetch(url).then((res) => res.json())
   );
 
   useEffect(() => {
@@ -90,6 +96,13 @@ function FilteredEventsPage(props) {
 
   return (
     <>
+      <Head>
+        <title>Filtered Events</title>
+        <meta
+          name='description'
+          content={`All events for ${numMonth}/${numYear}.`}
+        />
+      </Head>
       <ResultsTitle date={date} />
       <EventList events={filteredEvents} />
     </>
