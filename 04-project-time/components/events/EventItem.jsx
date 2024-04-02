@@ -1,9 +1,14 @@
+// Next js imports
+import Image from "next/image";
+// UI Imports
 import Button from "../ui/Button";
+// Icon imports
 import DateIcon from "../icons/DateIcon";
-
-import styles from "./EventItem.module.css";
 import AddressIcon from "../icons/AddressIcon";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
+// Module imports
+import styles from "./EventItem.module.css";
+
 function EventItem({ title, image, date, location, id }) {
   const humarnReadableDate = new Date(date).toLocaleDateString("en-US", {
     day: "numeric",
@@ -16,7 +21,7 @@ function EventItem({ title, image, date, location, id }) {
 
   return (
     <li className={styles.item}>
-      <img src={"/" + image} alt={title} />
+      <Image src={"/" + image} alt={title} width={250} height={160} />
       <div className={styles.content}>
         <div className={styles.summary}>
           <h2>{title}</h2>

@@ -1,6 +1,14 @@
+// Next js imports
+import Image from "next/image";
+
+// Icon imports
 import AddressIcon from "../icons/AddressIcon";
 import DateIcon from "../icons/DateIcon";
+
+// Component imports
 import LogisticsItem from "./LogisticsItem";
+
+// Module imports
 import styles from "./EventLogistics.module.css";
 
 function EventLogistics({ date, address, image, imageAlt }) {
@@ -14,7 +22,7 @@ function EventLogistics({ date, address, image, imageAlt }) {
   return (
     <section className={styles.logistics}>
       <div className={styles.image}>
-        <img src={`/${image}`} alt={imageAlt} />
+        <Image src={`/${image}`} alt={imageAlt} width={400} height={400} />
       </div>
       <ul className={styles.list}>
         <LogisticsItem icon={DateIcon}>
