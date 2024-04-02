@@ -30,7 +30,6 @@ export async function getStaticProps() {
       revalidate: 60,
     };
   } catch (err) {
-    console.error(err.message);
     const events = dummyGetAllEvents();
     return {
       props: {

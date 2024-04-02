@@ -43,7 +43,6 @@ export async function getStaticProps(context) {
       revalidate: 30,
     };
   } catch (err) {
-    console.log(err.message);
     const eventId = context.params.eventId;
     const event = dummyGetEventById(eventId);
 
@@ -66,7 +65,6 @@ export async function getStaticPaths() {
       fallback: true,
     };
   } catch (err) {
-    console.error(err.message);
     const events = dummyGetFeaturedEvents();
     const paths = events.map((event) => ({ params: { eventId: event.id } }));
 

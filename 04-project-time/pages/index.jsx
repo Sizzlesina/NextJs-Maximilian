@@ -20,7 +20,6 @@ export async function getStaticProps() {
       revalidate: 1800,
     };
   } catch (err) {
-    console.log(err.message);
     const featuredEvents = dummyGetFeaturedEvents();
     return {
       props: {
