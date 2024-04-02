@@ -1,11 +1,10 @@
 {
-  "extends": ["next/babel", "next/core-web-vitals"], // => You can add "next/babel" here
+  "extends": ["next/core-web-vitals"],
   "overrides": [
     {
       "files": ["*.jsx", "*.js"],
       "rules": {
-        "no-unused-vars": "warn",
-        "@next/next/no-img-element": "off"
+        "no-unused-vars": "warn"
       }
     }
   ]
