@@ -5,7 +5,6 @@ import Head from "next/head";
 
 // Package imports
 import useSWR from "swr";
-import axios from "axios";
 
 // Component imports
 import ErrorAlert from "../../components/ui/ErrorAlert";
@@ -13,7 +12,7 @@ import Button from "../../components/ui/Button";
 import ResultsTitle from "../../components/events/ResultsTitle";
 import EventList from "../../components/events/EventList";
 
-function FilteredEventsPage(props) {
+function FilteredEventsPage() {
   const [loadedEvents, setLoadedEvents] = useState();
   const router = useRouter();
 
@@ -38,18 +37,38 @@ function FilteredEventsPage(props) {
     }
   }, [data]);
 
+  let pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta name='description' content={`A list of filtered events.`} />
+    </Head>
+  );
+
   if (!loadedEvents) {
     return (
       <>
+        {pageHeadData}
         <p className='center'>Loading...</p>
       </>
     );
   }
+
   const filteredYear = filterData[0];
   const filteredMonth = filterData[1];
 
   const numYear = +filteredYear;
   const numMonth = +filteredMonth;
+
+  // Add Head to the component dynamically
+  pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta
+        name='description'
+        content={`All events for ${numMonth}/${numYear}.`}
+      />
+    </Head>
+  );
 
   if (
     isNaN(numYear) ||
@@ -62,6 +81,7 @@ function FilteredEventsPage(props) {
   ) {
     return (
       <>
+        {pageHeadData}
         <ErrorAlert>
           <p>Invalid filter. Please adjust your values!</p>
         </ErrorAlert>
@@ -82,6 +102,7 @@ function FilteredEventsPage(props) {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <>
+        {pageHeadData}
         <ErrorAlert>
           <p>No events found for the chosen filter!</p>
         </ErrorAlert>
@@ -96,13 +117,7 @@ function FilteredEventsPage(props) {
 
   return (
     <>
-      <Head>
-        <title>Filtered Events</title>
-        <meta
-          name='description'
-          content={`All events for ${numMonth}/${numYear}.`}
-        />
-      </Head>
+      {pageHeadData}
       <ResultsTitle date={date} />
       <EventList events={filteredEvents} />
     </>
