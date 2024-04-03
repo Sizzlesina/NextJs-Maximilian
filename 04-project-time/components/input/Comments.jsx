@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import CommentList from "./CommentList";
 import NewComment from "./NewComment";
@@ -8,6 +8,18 @@ function Comments(props) {
   const { eventId } = props;
 
   const [showComments, setShowComments] = useState(false);
+  const [comments, setComments] = useState([]);
+
+  useEffect(
+    function () {
+      if (showComments) {
+        fetch("/api/comments/" + eventId)
+          .then((response) => response.json())
+          .then((data) => setComments(data.comments));
+      }
+    },
+    [showComments, eventId]
+  );
 
   function toggleCommentsHandler() {
     setShowComments((prevStatus) => !prevStatus);
@@ -15,6 +27,15 @@ function Comments(props) {
 
   function addCommentHandler(commentData) {
     // send data to API
+    fetch(`/api/comments/${eventId}`, {
+      method: "POST",
+      body: JSON.stringify(commentData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
   }
 
   return (
@@ -23,7 +44,7 @@ function Comments(props) {
         {showComments ? "Hide" : "Show"} Comments
       </button>
       {showComments && <NewComment onAddComment={addCommentHandler} />}
-      {showComments && <CommentList />}
+      {showComments && <CommentList items={comments} />}
     </section>
   );
 }

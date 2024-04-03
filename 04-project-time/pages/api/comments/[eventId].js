@@ -31,6 +31,6 @@ export default function handler(req, res) {
       { id: "c1", name: "Sina", comment: "A first comment" },
       { id: "c2", name: "Ali", comment: "A second comment" },
     ];
-    res.status(200).json({ comment: dummyList });
+    res.status(200).json({ comments: dummyList });
   }
 }
