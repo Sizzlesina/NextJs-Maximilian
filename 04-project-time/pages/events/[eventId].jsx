@@ -11,6 +11,7 @@ import ErrorAlert from "../../components/ui/ErrorAlert";
 // Handler function imports
 import { dummyGetFeaturedEvents, dummyGetEventById } from "../../dummy-data";
 import { getEventById, getFeaturedEvents } from "../../helpers/api-util";
+import Comments from "../../components/input/Comments";
 
 function EventDetailPage({ selectedEvent }) {
   const event = selectedEvent;
@@ -39,6 +40,7 @@ function EventDetailPage({ selectedEvent }) {
       <EventContent>
         <p>{event.description}</p>
       </EventContent>
+      <Comments eventId={event.id} />
     </>
   );
 }
