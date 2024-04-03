@@ -1,4 +1,4 @@
-import { buildFeedbackPath, extractFeedback } from "./feedback";
+import { buildFeedbackPath, extractFeedback } from ".";
 
 export default function handler(req, res) {
   // Get feedback id from the request sent to the api route
