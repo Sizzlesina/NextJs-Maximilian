@@ -4,22 +4,21 @@ import styles from "./NewsletterRegistration.module.css";
 function NewsletterRegistration() {
   const inputEmail = useRef();
 
-  function registrationHandler(event) {
+  async function registrationHandler(event) {
     event.preventDefault();
 
     const enteredEmail = inputEmail.current.value;
     const reqBody = { email: enteredEmail };
 
-    fetch("/api/newsletter", {
+    const response = await fetch("/api/newsletter", {
       method: "POST",
       body: JSON.stringify(reqBody),
       headers: {
         "Content-Type": "application/json",
       },
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-
+    });
+    const data = await response.json();
+    console.log(data);
     // fetch user input (state or refs)
     // optional: validate input
     // send valid data to API
