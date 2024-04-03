@@ -1,5 +1,4 @@
 // Next js imports
-import { useRouter } from "next/router";
 import Head from "next/head";
 
 // Component imports

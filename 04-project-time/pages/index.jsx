@@ -3,6 +3,7 @@ import Head from "next/head";
 
 // Component imports
 import EventList from "../components/events/EventList";
+import NewsletterRegistration from "../components/input/NewsletterRegistration";
 
 // Handler function imports
 import { dummyGetFeaturedEvents } from "../dummy-data";
@@ -18,6 +19,7 @@ function HomePage({ events }) {
           content='Find a lot of great events that allow you to evolve...'
         />
       </Head>
+      <NewsletterRegistration />
       <EventList events={events} />
     </div>
   );
