@@ -46,11 +46,16 @@ export default async function handler(req, res) {
     res.status(201).json({ message: "Added comment!", comment: newComment });
   }
   if (req.method === "GET") {
-    const dummyList = [
-      { id: "c1", name: "Sina", comment: "A first comment" },
-      { id: "c2", name: "Ali", comment: "A second comment" },
-    ];
-    res.status(200).json({ comments: dummyList });
+    const db = client.db("events");
+
+    // Fetch all the comments from mongodb : Sort is descending
+    const documents = await db
+      .collection("comments")
+      .find()
+      .sort({ _id: -1 })
+      .toArray();
+    // Return the fetched comments
+    res.status(200).json({ comments: documents });
   }
   // ----------------------------------------------------------------------------------
   // ! Close the mongodb connection

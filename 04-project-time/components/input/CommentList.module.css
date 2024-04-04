@@ -12,6 +12,7 @@
 
 .comments p {
   margin: 0;
+  font-weight: bold;
 }
 
 .comments li div {
