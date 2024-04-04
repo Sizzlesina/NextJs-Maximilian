@@ -1,7 +1,9 @@
+import useNotification from "../../hooks/useNotification";
 import styles from "./Notification.module.css";
 
-function Notification({title, message, status}) {
+function Notification({ title, message, status }) {
   let statusClasses = "";
+  const { hideNotification } = useNotification();
 
   if (status === "success") {
     statusClasses = styles.success;
@@ -18,7 +20,7 @@ function Notification({title, message, status}) {
   const activeClasses = `${styles.notification} ${statusClasses}`;
 
   return (
-    <div className={activeClasses}>
+    <div className={activeClasses} onClick={hideNotification}>
       <h2>{title}</h2>
       <p>{message}</p>
     </div>
