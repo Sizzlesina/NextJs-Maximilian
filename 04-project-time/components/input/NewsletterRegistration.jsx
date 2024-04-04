@@ -40,7 +40,7 @@ function NewsletterRegistration() {
           message: "Successfully registered for newsletter!",
           status: "success",
         });
-      })
+      })  
       .catch((err) => {
         showNotification({
           title: "Error!",
