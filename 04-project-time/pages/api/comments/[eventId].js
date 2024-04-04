@@ -1,12 +1,22 @@
 import { MongoClient } from "mongodb";
+import {
+  connectDatabase,
+  getAllDocuments,
+  insertDocument,
+} from "../../../helpers/db-util";
 
 export default async function handler(req, res) {
   // Get the event id from the request query
   const eventId = req.query.eventId;
   // ----------------------------------------------------------------------------------
   // @ Mongodb connect
-  const uri = process.env.MONGODB_URI;
-  const client = await MongoClient.connect(uri);
+  let client;
+  try {
+    client = await connectDatabase();
+  } catch (err) {
+    res.status(500).json({ message: "Connect to the database failed!" });
+    return;
+  }
   // ----------------------------------------------------------------------------------
 
   if (req.method === "POST") {
@@ -22,6 +32,7 @@ export default async function handler(req, res) {
       text.trim() === ""
     ) {
       res.status(422).json({ message: "Invalid input." });
+      client.close();
       return;
     }
 
@@ -34,29 +45,33 @@ export default async function handler(req, res) {
     };
     // ----------------------------------------------------------------------------------
     // @ Inset data to the database
-    const db = client.db("events");
-    const result = await db.collection("comments").insertOne(newComment);
-    console.log(result);
+    let result;
+    try {
+      result = await insertDocument(client, "comments", newComment);
+    } catch (err) {
+      res.status(500).json({ message: "Inserting comment failed!" });
+      return;
+    }
     // ----------------------------------------------------------------------------------
 
     // Set a new id for the newly created comment
-    newComment.id = result.insertedId;
+    newComment._id = result.insertedId;
 
     // Return a status and a message which show the operation done successfully
     res.status(201).json({ message: "Added comment!", comment: newComment });
   }
-  if (req.method === "GET") {
-    const db = client.db("events");
 
-    // Fetch all the comments from mongodb : Sort is descending
-    const documents = await db
-      .collection("comments")
-      .find()
-      .sort({ _id: -1 })
-      .toArray();
-    // Return the fetched comments
-    res.status(200).json({ comments: documents });
+  if (req.method === "GET") {
+    // Fetch all comments from the database
+    try {
+      const documents = await getAllDocuments(client, "comments", { _id: -1 });
+      // Return the fetched comments
+      res.status(200).json({ comments: documents });
+    } catch (err) {
+      res.status(500).json({ message: "Getting comments failed!" });
+    }
   }
+
   // ----------------------------------------------------------------------------------
   // ! Close the mongodb connection
   client.close();

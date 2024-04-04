@@ -8,7 +8,7 @@ import EventContent from "../../components/event-detail/EventContent";
 
 // Handler function imports
 import { dummyGetFeaturedEvents, dummyGetEventById } from "../../dummy-data";
-import { getEventById, getFeaturedEvents } from "../../helpers/api-util";
+import { getEventById, getFeaturedEvents } from "../../helpers/api-util.js";
 import Comments from "../../components/input/Comments";
 
 function EventDetailPage({ selectedEvent }) {

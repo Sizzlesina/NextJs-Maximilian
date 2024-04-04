@@ -7,7 +7,7 @@ import NewsletterRegistration from "../components/input/NewsletterRegistration";
 
 // Handler function imports
 import { dummyGetFeaturedEvents } from "../dummy-data";
-import { getFeaturedEvents } from "../helpers/api-util";
+import { getFeaturedEvents } from "../helpers/api-util.js";
 
 function HomePage({ events }) {
   return (

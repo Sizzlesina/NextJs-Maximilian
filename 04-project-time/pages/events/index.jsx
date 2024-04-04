@@ -8,7 +8,7 @@ import EventSearch from "../../components/events/EventSearch";
 
 // Handler function imports
 import { dummyGetAllEvents } from "../../dummy-data";
-import { getAllEvents } from "../../helpers/api-util";
+import { getAllEvents } from "../../helpers/api-util.js";
 
 function AllEventsPage({ events }) {
   const router = useRouter();
