@@ -1,6 +1,6 @@
 import styles from "./Notification.module.css";
 
-function Notification(title, message, status) {
+function Notification({title, message, status}) {
   let statusClasses = "";
 
   if (status === "success") {
