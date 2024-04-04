@@ -11,20 +11,27 @@ import styles from "./PostItem.module.css";
 function PostItem({ post }) {
   // Formating the date to a human readable format
   const formattedDate = formatDate(post.date);
-  // Dynamic image path
+  // Dynamic paths
   const imagePath = `/images/posts/${post.slug}/${post.image}`;
+  const linkPath = `/posts/${post.slug}`;
 
   return (
     <li className={styles.post}>
-      <Link>
+      <Link href={linkPath}>
         <a>
           <div className={styles.image}>
-            <Image src={imagePath} alt={title} width={300} height={200} />
+            <Image
+              src={imagePath}
+              alt={post.title}
+              width={300}
+              height={200}
+              layout='responsive'
+            />
           </div>
           <div className={styles.content}>
             <h3>{post.title}</h3>
             <time>{formattedDate}</time>
-            <p>[post.excert]</p>
+            <p>{post.excerpt}</p>
           </div>
         </a>
       </Link>
