@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     const client = await MongoClient.connect(uri);
 
     // Accessing the newsletter
-    const db = client.db("newsletter");
+    const db = client.db("events");
 
     // Insert one cell to the data table
     await db.collection("emails").insertOne({ email: userEmail });
