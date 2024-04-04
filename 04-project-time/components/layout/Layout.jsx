@@ -6,12 +6,12 @@ import Notification from "../ui/Notification.jsx";
 import useNotification from "../../hooks/useNotification.js";
 
 function Layout({ children }) {
-  // Destructing the values from context
-  const { showNotification, hideNotification, notification } =
-    useNotification();
-
-  // Rename the value
-  const activeNotification = notification;
+  // Destructing the values from context 
+  const {
+    showNotification,
+    hideNotification,
+    notification: activeNotification,
+  } = useNotification();
 
   return (
     <>
