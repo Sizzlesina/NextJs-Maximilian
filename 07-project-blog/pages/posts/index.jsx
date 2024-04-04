@@ -1,9 +1,11 @@
+// Component imports
+import AllPosts from "../../components/posts/AllPosts";
+
+// Dummy data import
+import { DUMMY_POSTS } from "../../dummy-data";
+
 function AllPostsPage() {
-  return (
-    <div>
-      <h1>I dont know yet about this route</h1>
-    </div>
-  )
+  return <AllPosts posts={DUMMY_POSTS} />;
 }
 
-export default AllPostsPage
+export default AllPostsPage;
