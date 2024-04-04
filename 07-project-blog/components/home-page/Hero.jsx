@@ -1,5 +1,8 @@
-import styles from "./Hero.module.css";
+// Next js imports
 import Image from "next/image";
+
+// CSS module import
+import styles from "./Hero.module.css";
 
 function Hero() {
   return (
@@ -13,7 +16,9 @@ function Hero() {
         />
       </div>
       <h1>Hi, Im Sina</h1>
-      <p>I am a passionate frontend developer - currently learning Next JS 🎓</p>
+      <p>
+        I am a passionate frontend developer - currently learning Next JS 🎓
+      </p>
     </section>
   );
 }

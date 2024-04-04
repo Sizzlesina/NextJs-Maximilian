@@ -1,9 +1,15 @@
-import Logo from "./Logo";
+// Next js imports
 import Link from "next/link";
+
+// Component imports
+import Logo from "./Logo";
+
+// CSS module import
+import styles from "./MainNavigation.module.css";
 
 function MainNavigation() {
   return (
-    <header>
+    <header className={styles.header}>
       <Link href='/'>
         <a>
           <Logo />

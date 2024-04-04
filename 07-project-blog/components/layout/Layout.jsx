@@ -1,3 +1,4 @@
+// Component imports
 import MainNavigation from "./MainNavigation";
 
 function Layout({ children }) {
