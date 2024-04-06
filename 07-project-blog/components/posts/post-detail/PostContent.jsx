@@ -1,9 +1,9 @@
+// Package imports
+import ReactMarkdown from "react-markdown";
 // Component imports
 import PostHeader from "./PostHeader";
-
 // Dummy data import
 import { DUMMY_POSTS } from "../../../data/dummy-data";
-
 // CSS module import
 import styles from "./PostContent.module.css";
 
@@ -22,7 +22,7 @@ function PostContent() {
   return (
     <article className={styles.content}>
       <PostHeader title={NEW_POST.title} image={imagePath} />
-      {NEW_POST.content}
+      <ReactMarkdown>{NEW_POST.content}</ReactMarkdown>
     </article>
   );
 }
