@@ -2,6 +2,8 @@
 import Image from "next/image";
 // Package imports
 import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 // Component imports
 import PostHeader from "./PostHeader";
 // CSS module import
@@ -10,8 +12,8 @@ import styles from "./PostContent.module.css";
 function PostContent({ post }) {
   // Dynamic path
   const imagePath = `/images/posts/${post.slug}/${post.image}`;
-
-  const customRenderers = {
+  // As components in the new syntax
+  const customComponents = {
     p(paragraph) {
       const { node } = paragraph;
 
@@ -32,12 +34,24 @@ function PostContent({ post }) {
 
       return <p>{paragraph.children}</p>;
     },
+    code(code) {
+      const { language, value } = code; // Bug
+      return (
+        <SyntaxHighlighter
+          style={atomDark}
+          language={language}
+          children={value}
+        />
+      );
+    },
   };
 
   return (
     <article className={styles.content}>
       <PostHeader title={post.title} image={imagePath} />
-      <ReactMarkdown components={customRenderers}>{post.content}</ReactMarkdown>
+      <ReactMarkdown components={customComponents}>
+        {post.content}
+      </ReactMarkdown>
     </article>
   );
 }
