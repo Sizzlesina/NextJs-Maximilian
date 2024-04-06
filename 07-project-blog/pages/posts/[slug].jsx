@@ -1,3 +1,5 @@
+// Next js imports
+import Head from "next/head";
 // Component imports
 import PostContent from "../../components/posts/post-detail/PostContent";
 // Utility imports
@@ -6,6 +8,10 @@ import { getPostData, getPostFiles } from "../../lib/posts-util";
 function PostDetailPage({ post }) {
   return (
     <div>
+      <Head>
+        <title>{post.title}</title>
+        <meta name='description' content={post.excerpt} />
+      </Head>
       <PostContent post={post} />
     </div>
   );
@@ -29,7 +35,7 @@ export function getStaticProps(context) {
 // For pre-rendering slug pages we need this function to manage the paths
 export function getStaticPaths() {
   const postFileNames = getPostFiles();
-  const slugs = postFileNames.map((fileName) => fileName.replace(/\.md$/, ''));
+  const slugs = postFileNames.map((fileName) => fileName.replace(/\.md$/, ""));
 
   return {
     paths: slugs.map((slug) => ({ params: { slug: slug } })),
