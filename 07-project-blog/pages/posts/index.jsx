@@ -1,11 +1,20 @@
 // Component imports
 import AllPosts from "../../components/posts/AllPosts";
+import { getAllPosts } from "../../lib/posts-util";
 
-// Dummy data import
-import { DUMMY_POSTS } from "../../data/dummy-data";
+function AllPostsPage({ posts }) {
+  return <AllPosts posts={posts} />;
+}
 
-function AllPostsPage() {
-  return <AllPosts posts={DUMMY_POSTS} />;
+// Pre-rendering the markdown data (All posts)
+export function getStaticProps() {
+  const allPosts = getAllPosts();
+
+  return {
+    props: {
+      posts: allPosts,
+    },
+  };
 }
 
 export default AllPostsPage;

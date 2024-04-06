@@ -4,32 +4,37 @@ import path from "path";
 // Package imports
 import matter from "gray-matter";
 
-// Current directory of the posts folder
+// # Current directory of the posts folder
 const postsDirectory = path.join(process.cwd(), "posts");
+// ------------------------------------------------------------------------------------------------------------------------------------------
+export function getPostFiles() {
+  return fs.readdirSync(postsDirectory);
+}
+// ------------------------------------------------------------------------------------------------------------------------------------------
+// @ Extract date from a specified file inside the posts folder
+export function getPostData(postIdentifier) {
+  const postSlug = postIdentifier.replace(/\.md$/, ""); // Removes the file extension
 
-// Extract date from a specified file inside the posts folder
-function getPostData(fileName) {
-  // selecting a file path inside the posts folder
-  const filePath = path.join(postsDirectory, fileName);
-  // selecting the content inside that file (second argument said : file encoding is utf-8 so it supports all those unicode characters)
-  const fileContent = fs.readFileSync(filePath, "utf-8");
-  // select the meta data from the content (Only meta data)
-  const { data, content } = matter(fileContent);
-  // Removes the file extension
-  const postSlug = fileName.replace(/\.md$/, "");
-  // Create a new data and add content and slug properties to it
+  const filePath = path.join(postsDirectory, `${postSlug}.md`); // selecting a file path inside the posts folder
+
+  const fileContent = fs.readFileSync(filePath, "utf-8"); // selecting the content inside that file (second argument said : file encoding is utf-8 so it supports all those unicode characters)
+
+  const { data, content } = matter(fileContent); // select the meta data from the content (Only meta data)
+
   const postData = {
+    // Create a new data and add content and slug properties to it
     slug: postSlug,
     ...data,
     content,
   };
-  // Return the newly created data
-  return postData;
+
+  return postData; // Return the newly created data
 }
-// Selecting all the files inside the posts folder
+
+// ------------------------------------------------------------------------------------------------------------------------------------------
+// @ Selecting all the files inside the posts folder
 export function getAllPosts() {
-  // Selecting all the files
-  const postFiles = fs.readdirSync(postsDirectory);
+  const postFiles = getPostFiles();
 
   // Get the content data from all the files
   const allPosts = postFiles.map((postFile) => {
@@ -41,13 +46,15 @@ export function getAllPosts() {
     postA.date > postB.date ? -1 : 1
   );
 
-  // Return sorted posts array
-  return sortedPosts;
+  return sortedPosts; // Return sorted posts array
 }
 
-// Get the post files which isFeatured : true
+// ------------------------------------------------------------------------------------------------------------------------------------------
+// @ Get the post files which isFeatured : true
 export function getFeaturedPosts() {
+  const allPosts = getAllPosts();
   const featuredPosts = allPosts.filter((post) => post.isFeatured);
 
   return featuredPosts;
 }
+// ------------------------------------------------------------------------------------------------------------------------------------------

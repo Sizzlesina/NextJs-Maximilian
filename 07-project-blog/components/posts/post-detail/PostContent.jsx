@@ -1,28 +1,43 @@
+// Next js imports
+import Image from "next/image";
 // Package imports
 import ReactMarkdown from "react-markdown";
 // Component imports
 import PostHeader from "./PostHeader";
-// Dummy data import
-import { DUMMY_POSTS } from "../../../data/dummy-data";
 // CSS module import
 import styles from "./PostContent.module.css";
 
-// Destruct a object from dummy data
-const POST = DUMMY_POSTS[0];
+function PostContent({ post }) {
+  // Dynamic path
+  const imagePath = `/images/posts/${post.slug}/${post.image}`;
 
-// A new property for the destructed object
-const NEW_POST = {
-  ...POST,
-  content: "# This is a first post",
-};
+  const customRenderers = {
+    p(paragraph) {
+      const { node } = paragraph;
 
-function PostContent() {
-  const imagePath = `/images/posts/${NEW_POST.slug}/${NEW_POST.image}`;
+      if (node.children[0].tagName === "img") {
+        const image = node.children[0];
+
+        return (
+          <div className={styles.image}>
+            <Image
+              src={`/images/posts/${post.slug}/${image.properties.src}`}
+              alt={image.alt}
+              width={600}
+              height={300}
+            />
+          </div>
+        );
+      }
+
+      return <p>{paragraph.children}</p>;
+    },
+  };
 
   return (
     <article className={styles.content}>
-      <PostHeader title={NEW_POST.title} image={imagePath} />
-      <ReactMarkdown>{NEW_POST.content}</ReactMarkdown>
+      <PostHeader title={post.title} image={imagePath} />
+      <ReactMarkdown components={customRenderers}>{post.content}</ReactMarkdown>
     </article>
   );
 }
