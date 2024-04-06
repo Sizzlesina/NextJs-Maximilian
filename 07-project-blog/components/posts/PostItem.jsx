@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 // Hook and Helper imports
-import { formatDate } from "../../helpers/utils";
+import { formatDate } from "../../lib/utils";
 
 // CSS module import
 import styles from "./PostItem.module.css";

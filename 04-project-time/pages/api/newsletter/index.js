@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       return;
     }
 
-    // Inserting data to the database BUT with error handlingc
+    // Inserting data to the database BUT with error handling
     try {
       await insertDocument(client, "emails", { email: userEmail });
       // Close the client
