@@ -29,7 +29,7 @@ export function getStaticProps(context) {
 // For pre-rendering slug pages we need this function to manage the paths
 export function getStaticPaths() {
   const postFileNames = getPostFiles();
-  const slugs = postFileNames.map((fileName) => fileName.replace(/\.md$/, ""));
+  const slugs = postFileNames.map((fileName) => fileName.replace(/\.md$/, ''));
 
   return {
     paths: slugs.map((slug) => ({ params: { slug: slug } })),

@@ -1,5 +1,6 @@
 // Component imports
 import AllPosts from "../../components/posts/AllPosts";
+// Utility imports
 import { getAllPosts } from "../../lib/posts-util";
 
 function AllPostsPage({ posts }) {

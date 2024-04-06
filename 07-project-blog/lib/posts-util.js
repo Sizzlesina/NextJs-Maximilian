@@ -13,7 +13,7 @@ export function getPostFiles() {
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // @ Extract date from a specified file inside the posts folder
 export function getPostData(postIdentifier) {
-  const postSlug = postIdentifier.replace(/\.md$/, ""); // Removes the file extension
+  const postSlug = postIdentifier.replace(/\.md$/, ''); // Removes the file extension
 
   const filePath = path.join(postsDirectory, `${postSlug}.md`); // selecting a file path inside the posts folder
 
