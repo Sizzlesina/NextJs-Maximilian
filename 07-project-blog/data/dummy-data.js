@@ -2,7 +2,7 @@
 export const DUMMY_POSTS = [
   {
     slug: "getting-started-with-nextjs",
-    title: "Getting started with next js ",
+    title: "Getting Started with NextJS ",
     image: "getting-started-nextjs.png",
     excerpt:
       "NextJS is a React framework for production - it makes building fullstack React apps and sites a breeze and ships with server side rendering",
@@ -10,7 +10,7 @@ export const DUMMY_POSTS = [
   },
   {
     slug: "getting-started-with-nextjs",
-    title: "Getting started with next js ",
+    title: "Getting Started with NextJS ",
     image: "getting-started-nextjs.png",
     excerpt:
       "NextJS is a React framework for production - it makes building fullstack React apps and sites a breeze and ships with server side rendering",
@@ -18,7 +18,7 @@ export const DUMMY_POSTS = [
   },
   {
     slug: "getting-started-with-nextjs",
-    title: "Getting started with next js ",
+    title: "Getting Started with NextJS ",
     image: "getting-started-nextjs.png",
     excerpt:
       "NextJS is a React framework for production - it makes building fullstack React apps and sites a breeze and ships with server side rendering",
@@ -26,7 +26,7 @@ export const DUMMY_POSTS = [
   },
   {
     slug: "getting-started-with-nextjs",
-    title: "Getting started with next js ",
+    title: "Getting Started with NextJS ",
     image: "getting-started-nextjs.png",
     excerpt:
       "NextJS is a React framework for production - it makes building fullstack React apps and sites a breeze and ships with server side rendering",
