@@ -1,10 +1,8 @@
+// Component imports
+import StartingPageContent from "../components/starting-page/StartingPage";
+
 function HomePage() {
-  return (
-    <div>
-      <h1>Home</h1>
-      <p>nothing like a sweet home</p>
-    </div>
-  );
+  return <StartingPageContent />;
 }
 
 export default HomePage;
