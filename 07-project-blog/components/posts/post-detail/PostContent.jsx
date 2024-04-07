@@ -2,12 +2,19 @@
 import Image from "next/image";
 // Package imports
 import ReactMarkdown from "react-markdown";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import atomDark from "react-syntax-highlighter/dist/cjs/styles/prism/atom-dark";
+import js from "react-syntax-highlighter/dist/cjs/languages/prism/javascript";
+import css from "react-syntax-highlighter/dist/cjs/languages/prism/css";
+
 // Component imports
 import PostHeader from "./PostHeader";
 // CSS module import
 import styles from "./PostContent.module.css";
+
+// For lower bundle size
+SyntaxHighlighter.registerLanguage("js", js);
+SyntaxHighlighter.registerLanguage("css", css);
 
 function PostContent({ post }) {
   // Dynamic path
@@ -56,3 +63,5 @@ function PostContent({ post }) {
 }
 
 export default PostContent;
+
+// project deployed
