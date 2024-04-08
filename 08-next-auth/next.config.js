@@ -7,7 +7,7 @@ module.exports = (phase) => {
         mongodb_username: "nextAuth",
         mongodb_password: "Pqp3alyBophwbBOK",
         mongodb_clustername: "cluster0",
-        mongodb_database: "auth",
+        mongodb_database: "auth-demo",
       },
     };
   }
@@ -17,7 +17,7 @@ module.exports = (phase) => {
       mongodb_username: "nextAuth",
       mongodb_password: "Pqp3alyBophwbBOK",
       mongodb_clustername: "cluster0",
-      mongodb_database: "auth-demo",
+      mongodb_database: "auth",
     },
   };
 };

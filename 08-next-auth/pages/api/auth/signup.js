@@ -1,4 +1,3 @@
-import { MongoClient } from "mongodb";
 import { hashPassword } from "../../../lib/auth";
 import { connectToDatabase } from "../../../lib/db-util";
 

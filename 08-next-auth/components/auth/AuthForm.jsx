@@ -1,3 +1,5 @@
+// Next Auth imports
+import { signIn } from "next-auth/client";
 // Built-in imports
 import { useRef, useState } from "react";
 // CSS module import
@@ -31,17 +33,27 @@ function AuthForm() {
 
   async function submitHandler(event) {
     event.preventDefault();
-    const enteredEmail = emailInput.current.value;
-    const enteredPassword = passwordInput.current.value;
+    try {
+      const enteredEmail = emailInput.current.value;
+      const enteredPassword = passwordInput.current.value;
 
-    if (isLogin) {
-    } else {
-      try {
+      if (isLogin) {
+        const result = await signIn("credentials", {
+          redirect: false,
+          email: enteredEmail,
+          password: enteredPassword,
+        });
+        console.log(result);
+
+        if(!result.error){
+          route
+        }
+      } else {
         const result = await createUser(enteredEmail, enteredPassword);
         console.log(result);
-      } catch (err) {
-        console.log(err);
       }
+    } catch (err) {
+      console.log(err.message);
     }
   }
 
@@ -60,7 +72,7 @@ function AuthForm() {
         <div className={styles.actions}>
           <button>{isLogin ? "Login" : "Create Account"}</button>
           <button
-            type='submit'      
+            type='submit'
             className={styles.toggle}
             onClick={switchAuthModeHandler}>
             {isLogin ? "Create new account" : "Login with existing account"}
