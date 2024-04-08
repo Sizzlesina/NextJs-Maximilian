@@ -1,5 +1,5 @@
 import { hashPassword } from "../../../lib/auth";
-import { connectDatabase, insertDocument } from "../../../lib/db";
+import { connectDatabase, insertDocument, logCheck } from "../../../lib/db";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -18,6 +18,13 @@ export default async function handler(req, res) {
     return;
   }
 
+  const existingUser = logCheck({ email: email });
+  if (existingUser) {
+    res.status(422).json({ message: "User exists already!" });
+    client.close();
+    return;
+  }
+
   const hashedPassword = await hashPassword(password);
 
   const client = await connectDatabase();
@@ -27,4 +34,5 @@ export default async function handler(req, res) {
   });
 
   res.status(201).json({ messag: "Created user!" });
+  client.close();
 }

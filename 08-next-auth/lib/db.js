@@ -14,3 +14,8 @@ export async function insertDocument(client, collection, document) {
   return result;
 }
 
+export async function logCheck(user) {
+  const existingUser = await db.collection("users").findOne(user);
+
+  return existingUser;
+}
