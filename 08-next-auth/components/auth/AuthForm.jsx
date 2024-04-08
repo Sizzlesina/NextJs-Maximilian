@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 // CSS module import
 import styles from "./AuthForm.module.css";
 
+// Create user with a function outside the component
 async function createUser(email, password) {
   const response = await fetch("/api/auth/signup", {
     method: "POST",
@@ -45,14 +46,14 @@ function AuthForm() {
           email: enteredEmail,
           password: enteredPassword,
         });
-        console.log(result);
+        console.log(result); // We want to do more than that but in here this is enough
 
         if (!result.error) {
           router.replace("/profile");
         }
       } else {
         const result = await createUser(enteredEmail, enteredPassword);
-        console.log(result);
+        console.log(result); // We want to do more than that but in here this is enough
       }
     } catch (err) {
       console.log(err.message);

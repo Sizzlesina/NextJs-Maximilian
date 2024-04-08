@@ -28,8 +28,8 @@ export default NextAuth({
         }
 
         const isValid = await verifyPassword(
-          credentials.password,
-          user.password
+          credentials.password, // enteredPassword
+          user.password // password of the user in the database which is a hashed password
         );
 
         // Check if the input password is as same as the password in the database or not

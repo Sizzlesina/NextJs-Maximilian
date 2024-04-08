@@ -14,7 +14,9 @@ function AuthPage() {
       getSession().then((session) => {
         if (session) {
           router.replace("/");
-        } else [setIsLoading(false)];
+        } else {
+          setIsLoading(false);
+        }
       });
     },
     [router]

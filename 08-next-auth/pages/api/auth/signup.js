@@ -42,6 +42,6 @@ export default async function handler(req, res) {
     .insertOne({ email: email, password: hashedPassword });
 
   // Return a response from the server
-  res.status(201).json({ messag: "Created user!" });
+  res.status(201).json({ message: "Created user!" });
   client.close();
 }
