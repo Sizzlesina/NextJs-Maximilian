@@ -45,8 +45,7 @@ function AuthForm() {
         });
         console.log(result);
 
-        if(!result.error){
-          route
+        if (!result.error) {
         }
       } else {
         const result = await createUser(enteredEmail, enteredPassword);
