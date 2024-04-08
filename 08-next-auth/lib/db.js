@@ -1,6 +1,16 @@
 import { MongoClient } from "mongodb";
 
-async function connectDatabase() {
-  // Should connect the database in here (Database wont work)
-  const client = await MongoClient.connect();
+export async function connectDatabase() {
+  const uri = `mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@${process.env.mongodb_clustername}.5yponfa.mongodb.net/admin`;
+  const client = await MongoClient.connect(uri);
+
+  return client;
 }
+
+export async function insertDocument(client, collection, document) {
+  const db = client.db(process.env.mongodb_database);
+  const result = await db.collection(collection).insertOne(document);
+
+  return result;
+}
+
